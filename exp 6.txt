@@ -1,0 +1,73 @@
+mysql> use shopping;
+Database changed
+mysql> desc shopping;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| itemid   | int(5)      | YES  |     | NULL    |       |
+| itemname | varchar(10) | YES  |     | NULL    |       |
+| date     | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from shopping;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
+|     12 | kurkure  | 2023-01-27 |
+|      1 | rolo     | 2023-01-28 |
++--------+----------+------------+
+5 rows in set (0.02 sec)
+
+mysql> select * from bill;
++--------+----------+------------+
+| billno | itemname | amountpaid |
++--------+----------+------------+
+|  19110 | biscuits |         20 |
+|  19111 | lays     |         10 |
+|  19112 | bingo    |         40 |
+|  19113 | kurkure  |         50 |
+|  19114 | rolo     |        800 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select itemname,billno from bill order by amountpaid;
++----------+--------+
+| itemname | billno |
++----------+--------+
+| lays     |  19111 |
+| biscuits |  19110 |
+| bingo    |  19112 |
+| kurkure  |  19113 |
+| rolo     |  19114 |
++----------+--------+
+5 rows in set (0.01 sec)
+
+mysql> select * from faculty;
+ERROR 1146 (42S02): Table 'shopping.faculty' doesn't exist
+mysql> select * from shopping;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
+|     12 | kurkure  | 2023-01-27 |
+|      1 | rolo     | 2023-01-28 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from shopping order by itemid;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|      1 | rolo     | 2023-01-28 |
+|     12 | kurkure  | 2023-01-27 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
+|  12345 | biscuits | 2023-01-26 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
