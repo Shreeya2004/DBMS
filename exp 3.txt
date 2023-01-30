@@ -1,0 +1,23 @@
+EXPERIMENT 3:
+mysql> INSERT INTO student values ('206','HEMANTH','M','2005-06-10','ONGOLE','830938992')
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+---------+--------+------------+--------+-----------+
+| idno | name    | gender | dob        | city   | mobileno  |
++------+---------+--------+------------+--------+-----------+
+|  206 | HEMANTH | M      | 2005-06-10 | ONGOLE | 830938992 |
++------+---------+--------+------------+--------+-----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO student values ('215','SHREEYA','F','2004-06-18','VIJAYAWADA','891995202');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from student;
++------+---------+--------+------------+------------+-----------+
+| idno | name    | gender | dob        | city       | mobileno  |
++------+---------+--------+------------+------------+-----------+
+|  206 | HEMANTH | M      | 2005-06-10 | ONGOLE     | 830938992 |
+|  215 | SHREEYA | F      | 2004-06-18 | VIJAYAWADA | 891995202 |
++------+---------+--------+------------+------------+-----------+
+2 rows in set (0.00 sec)
