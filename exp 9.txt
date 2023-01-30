@@ -1,0 +1,73 @@
+EXPERIMENT 9:
+mysql> use mates;
+Database changed
+mysql> select * from customers;
++------+--------+--------------+
+| cid  | cname  | cemail       |
++------+--------+--------------+
+|  101 | gopal  | go@gmail.com |
+|  102 | mikasa | mi@gmail.com |
+|  103 | rupa   | ru@gmail.com |
++------+--------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from orders;
++------+-------------+------+
+| oid  | ordertime   | cid  |
++------+-------------+------+
+|    1 | 7 roads     |  101 |
+|    2 | wall street |  103 |
++------+-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customers,orders
+    -> where customers.cid =orders.cid;
++------+-------+--------------+------+-------------+------+
+| cid  | cname | cemail       | oid  | ordertime   | cid  |
++------+-------+--------------+------+-------------+------+
+|  101 | gopal | go@gmail.com |    1 | 7 roads     |  101 |
+|  103 | rupa  | ru@gmail.com |    2 | wall street |  103 |
++------+-------+--------------+------+-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select cid,cname,cemail
+    -> from customers
+    -> left join orders
+    -> on customers.cid=orders.cid;
+ERROR 1052 (23000): Column 'cid' in field list is ambiguous
+mysql> select cid,cname,cemail
+    ->     -> from customers
+    ->     -> left join orders
+    -> select cid,
+    -> asda
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> from customers
+    -> left join orders
+select cid,
+asda' at line 2
+mysql> select customers.cid,cname,cemail
+    -> from customers
+    -> left join orders
+    -> on customers.cid=orders.cid;
++------+--------+--------------+
+| cid  | cname  | cemail       |
++------+--------+--------------+
+|  101 | gopal  | go@gmail.com |
+|  102 | mikasa | mi@gmail.com |
+|  103 | rupa   | ru@gmail.com |
++------+--------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select customers.cid,cname,cemail
+    -> from customers
+    -> right join orders
+    -> on customers.cid=orders.cid;
++------+-------+--------------+
+| cid  | cname | cemail       |
++------+-------+--------------+
+|  101 | gopal | go@gmail.com |
+|  103 | rupa  | ru@gmail.com |
++------+-------+--------------+
+2 rows in set (0.00 sec)
+
+mysql>
