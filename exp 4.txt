@@ -1,0 +1,48 @@
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | int(4)      | NO   | PRI | 0       |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> select * from faculty;
++-------+---------+--------+------------+------------+-----------+
+| facno | name    | gender | dob        | doj        | mobileno  |
++-------+---------+--------+------------+------------+-----------+
+|  1206 | hemanth | M      | 2005-06-10 | 2022-09-24 | 830938992 |
+|  1215 | Shreeya | F      | 2004-01-18 | 2022-09-23 | 918273832 |
++-------+---------+--------+------------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> update faculty set mobileno='891995202' where doj='2022-09-23';\
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from faculty;
++-------+---------+--------+------------+------------+-----------+
+| facno | name    | gender | dob        | doj        | mobileno  |
++-------+---------+--------+------------+------------+-----------+
+|  1206 | hemanth | M      | 2005-06-10 | 2022-09-24 | 830938992 |
+|  1215 | Shreeya | F      | 2004-01-18 | 2022-09-23 | 891995202 |
++-------+---------+--------+------------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> delete from faculty where facno=1215;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from faculty;
++-------+---------+--------+------------+------------+-----------+
+| facno | name    | gender | dob        | doj        | mobileno  |
++-------+---------+--------+------------+------------+-----------+
+|  1206 | hemanth | M      | 2005-06-10 | 2022-09-24 | 830938992 |
++-------+---------+--------+------------+------------+-----------+
+1 row in set (0.00 sec)
+
