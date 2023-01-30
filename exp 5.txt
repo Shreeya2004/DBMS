@@ -1,0 +1,161 @@
+mysql> use shopping;
+Database changed
+mysql> desc shopping;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| itemid   | int(5)      | YES  |     | NULL    |       |
+| itemname | varchar(10) | YES  |     | NULL    |       |
+| date     | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> select * from shopping;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
++--------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into shopping values ('123','lays','2023-01-25');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into shopping values ('1234','bingo','2023-01-24');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shopping values ('12','kurkure','2023-01-27');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shopping values ('1','rolo','2023-01-28');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from shopping;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
+|     12 | kurkure  | 2023-01-27 |
+|      1 | rolo     | 2023-01-28 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select from shopping where itemid between '123' and '12345';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from shopping where itemid between '123' and '12345'' at line 1
+mysql> select * from shopping where itemid between '123' and '12345';
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
++--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from shopping where itemname='bingo' and itemid='12';
+Empty set (0.00 sec)
+
+mysql> select * from shopping where itemname='bingo' and itemid='1234';\
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|   1234 | bingo    | 2023-01-24 |
++--------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> create table bill (billno int(5), itemname varchar(15),amountpaid int(4));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc bill;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| billno     | int(5)      | YES  |     | NULL    |       |
+| itemname   | varchar(15) | YES  |     | NULL    |       |
+| amountpaid | int(4)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into bill values ('19110','biscuits','20');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into bill values ('19111','lays', '10');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into bill values ('19112','bingo','40');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into bill values ('19113','kurkure','50');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bill values ('19114','rolo','800');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bill;
++--------+----------+------------+
+| billno | itemname | amountpaid |
++--------+----------+------------+
+|  19110 | biscuits |         20 |
+|  19111 | lays     |         10 |
+|  19112 | bingo    |         40 |
+|  19113 | kurkure  |         50 |
+|  19114 | rolo     |        800 |
++--------+----------+------------+
+5 rows in set (0.02 sec)
+
+mysql> select avg(amountpaid) from bill;
++-----------------+
+| avg(amountpaid) |
++-----------------+
+|        184.0000 |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> select max(amountpaid),min(amountpaid) from bill;
++-----------------+-----------------+
+| max(amountpaid) | min(amountpaid) |
++-----------------+-----------------+
+|             800 |              10 |
++-----------------+-----------------+
+1 row in set (0.00 sec)
+mysql> select max(amountpaid),min(amountpaid) from bill where billno='19111';
++-----------------+-----------------+
+| max(amountpaid) | min(amountpaid) |
++-----------------+-----------------+
+|              10 |              10 |
++-----------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(amountpaid),max(amountpaid),min(amountpaid) from bill where billno=19110;
++-----------------+-----------------+-----------------+
+| avg(amountpaid) | max(amountpaid) | min(amountpaid) |
++-----------------+-----------------+-----------------+
+|         20.0000 |              20 |              20 |
++-----------------+-----------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(amountpaid) from bill where itemname=rolo;
+ERROR 1054 (42S22): Unknown column 'rolo' in 'where clause'
+mysql> select avg(amountpaid) from bill where itemname='rolo';
++-----------------+
+| avg(amountpaid) |
++-----------------+
+|        800.0000 |
++-----------------+
+1 row in set (0.00 sec)
+mysql> select sum(amountpaid) from bill;
++-----------------+
+| sum(amountpaid) |
++-----------------+
+|             920 |
++-----------------+
+1 row in set (0.00 sec)
+mysql> select itemname ,count(amountpaid) from bill;
++----------+-------------------+
+| itemname | count(amountpaid) |
++----------+-------------------+
+| biscuits |                 5 |
++----------+-------------------+
+1 row in set (0.00 sec)
