@@ -1,0 +1,93 @@
+mysql> use shopping;
+Database changed
+mysql> select * from shopping;
++--------+----------+------------+
+| itemid | itemname | date       |
++--------+----------+------------+
+|  12345 | biscuits | 2023-01-26 |
+|    123 | lays     | 2023-01-25 |
+|   1234 | bingo    | 2023-01-24 |
+|     12 | kurkure  | 2023-01-27 |
+|      1 | rolo     | 2023-01-28 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from bill;
++--------+----------+------------+
+| billno | itemname | amountpaid |
++--------+----------+------------+
+|  19110 | biscuits |         20 |
+|  19111 | lays     |         10 |
+|  19112 | bingo    |         40 |
+|  19113 | kurkure  |         50 |
+|  19114 | rolo     |        800 |
++--------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from bill where amountpaid>(select avg(amountpaid) from bill);
++--------+----------+------------+
+| billno | itemname | amountpaid |
++--------+----------+------------+
+|  19114 | rolo     |        800 |
++--------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> alter table bill add column itemid int(5);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from bill;
++--------+----------+------------+--------+
+| billno | itemname | amountpaid | itemid |
++--------+----------+------------+--------+
+|  19110 | biscuits |         20 |   NULL |
+|  19111 | lays     |         10 |   NULL |
+|  19112 | bingo    |         40 |   NULL |
+|  19113 | kurkure  |         50 |   NULL |
+|  19114 | rolo     |        800 |   NULL |
++--------+----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update bill set itemid=18900 where itemname='biscuits';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bill set itemid=18901 where itemname='lays';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bill set itemid=18902 where itemname='bingo';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bill set itemid=18903 where itemname='kurkure';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update bill set itemid=18904 where itemname='rolo';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from bill;
++--------+----------+------------+--------+
+| billno | itemname | amountpaid | itemid |
++--------+----------+------------+--------+
+|  19110 | biscuits |         20 |  18900 |
+|  19111 | lays     |         10 |  18901 |
+|  19112 | bingo    |         40 |  18902 |
+|  19113 | kurkure  |         50 |  18903 |
+|  19114 | rolo     |        800 |  18904 |
++--------+----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from itemid>18903;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>18903' at line 1
+mysql> select * from bill itemid>18903;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>18903' at line 1
+mysql> select * from bill where itemid>18903;
++--------+----------+------------+--------+
+| billno | itemname | amountpaid | itemid |
++--------+----------+------------+--------+
+|  19114 | rolo     |        800 |  18904 |
++--------+----------+------------+--------+
+1 row in set (0.00 sec)
