@@ -1,0 +1,117 @@
+mysql> create database data;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use data;
+Database changed
+mysql> delimiter//
+    -> Delimiter //
+    -> CREATE PROCEDURE While_Loop()
+    -> CREATE PROCEDURE While_Loop();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delimiter//Delimiter //CREATE PROCEDURE While_Loop()
+CREATE PROCEDURE While_Loop' at line 1
+mysql> Delimiter //
+mysql> CREATE PROCEDURE While_Loop()
+    ->  BEGIN
+    -> DECLARE A INT;
+    -> DECALRE XYZ varchar(50);
+    -> SET A = 1;
+    -> SET XYZ = '';
+    -> WHILE A <=10 DO
+    -> SET XYZ = CONCAT(XYZ,A,',');
+    -> SET A = A + 1;
+    -> END WHILE;
+    -> SELECT XYZ;
+    -> END //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'XYZ varchar(50);
+SET A = 1;
+SET XYZ = '';
+WHILE A <=10 DO
+SET XYZ = CONCAT(XYZ,A' at line 4
+mysql> CREATE PROCEDURE While_Loop()
+    ->  BEGIN
+    -> DECLARE A INT;
+    -> DECLARE XYZ varchar(50);
+    -> SET A = 1;
+    -> SET XYZ = '';
+    -> WHILE A <=10 DO
+    -> SET XYZ = CONCAT(XYZ,A,',');
+    -> SET A = A + 1;
+    -> END WHILE;
+    -> SELECT XYZ;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER ;
+mysql> call while_Loop();
++-----------------------+
+| XYZ                   |
++-----------------------+
+| 1,2,3,4,5,6,7,8,9,10, |
++-----------------------+
+1 row in set (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE RepeatSample()
+    -> BEGIN
+    ->     DECLARE counter INT DEFAULT 1;
+    ->     DECLARE result VARCHAR(100) DEFAULT '';
+    ->     REPEAT
+    ->         SET result = CONCAT(result,counter,',');
+    ->         SET counter = counter + 1;
+    ->     UNTILL counter >=10
+    ->     END REPEAT;
+    ->
+    ->     -- display result
+    ->     SELECT result;
+    -> END$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'counter >=10
+    END REPEAT;
+
+
+    SELECT result;
+END' at line 8
+mysql> DELIMITER $$
+mysql>
+mysql> CREATE PROCEDURE RepeatSample()
+    -> BEGIN
+    ->     DECLARE counter INT DEFAULT 1;
+    ->     DECLARE result VARCHAR(100) DEFAULT '';
+    ->     REPEAT
+    ->         SET result = CONCAT(result,counter,',');
+    ->         SET counter = counter + 1;
+    ->     UNTILL counter >=10
+    ->     END REPEAT;
+    -> ;
+    -> END$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'counter >=10
+    END REPEAT;
+;
+END' at line 8
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE RepeatSample()
+    -> BEGIN
+    ->     DECLARE counter INT DEFAULT 1;
+    ->     DECLARE result VARCHAR(100) DEFAULT '';
+    ->     REPEAT
+    ->         SET result = CONCAT(result,counter,',');
+    ->         SET counter = counter + 1;
+    ->     UNTIL counter >= 10
+    ->     END REPEAT;
+    ->
+    ->     --  display result
+    ->     SELECT result;
+    -> END$$
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER ;
+mysql> CALL RepeatSample();
++--------------------+
+| result             |
++--------------------+
+| 1,2,3,4,5,6,7,8,9, |
++--------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
