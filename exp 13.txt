@@ -1,0 +1,163 @@
+mysql> create database players;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use players;
+Database changed
+mysql> create table players(jersey_no int(3),first_name varchar(15),last_name varchar(15),dob date,birth_place varchar(20),playing_for varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc players;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| jersey_no   | int(3)      | YES  |     | NULL    |       |
+| first_name  | varchar(15) | YES  |     | NULL    |       |
+| last_name   | varchar(15) | YES  |     | NULL    |       |
+| dob         | date        | YES  |     | NULL    |       |
+| birth_place | varchar(20) | YES  |     | NULL    |       |
+| playing_for | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into players values('55','ben','stokes','1991-06-04','christchurch','england');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into players values('07','ms','dhoni','1981-07-07','ranchi','india');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values('18','virat','kohli','1988-11-05','delhi','india');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into players values('18','ruturaj','gaikwad','1997-01-31','pune','india');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from players;
++-----------+------------+-----------+------------+--------------+-------------+
+| jersey_no | first_name | last_name | dob        | birth_place  | playing_for |
++-----------+------------+-----------+------------+--------------+-------------+
+|        55 | ben        | stokes    | 1991-06-04 | christchurch | england     |
+|         7 | ms         | dhoni     | 1981-07-07 | ranchi       | india       |
+|        18 | virat      | kohli     | 1988-11-05 | delhi        | india       |
+|        18 | ruturaj    | gaikwad   | 1997-01-31 | pune         | india       |
++-----------+------------+-----------+------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from players;
++-----------+------------+-----------+------------+--------------+-------------+
+| jersey_no | first_name | last_name | dob        | birth_place  | playing_for |
++-----------+------------+-----------+------------+--------------+-------------+
+|        55 | ben        | stokes    | 1991-06-04 | christchurch | england     |
+|         7 | ms         | dhoni     | 1981-07-07 | ranchi       | india       |
+|        18 | virat      | kohli     | 1988-11-05 | delhi        | india       |
+|        18 | ruturaj    | gaikwad   | 1997-01-31 | pune         | india       |
++-----------+------------+-----------+------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> delete from players where jerser_no=18;
+ERROR 1054 (42S22): Unknown column 'jerser_no' in 'where clause'
+mysql> delete from players where jersey_no=18;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from players;
++-----------+------------+-----------+------------+--------------+-------------+
+| jersey_no | first_name | last_name | dob        | birth_place  | playing_for |
++-----------+------------+-----------+------------+--------------+-------------+
+|        55 | ben        | stokes    | 1991-06-04 | christchurch | england     |
+|         7 | ms         | dhoni     | 1981-07-07 | ranchi       | india       |
++-----------+------------+-----------+------------+--------------+-------------+
+2 rows in set (0.02 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from players;
++-----------+------------+-----------+------------+--------------+-------------+
+| jersey_no | first_name | last_name | dob        | birth_place  | playing_for |
++-----------+------------+-----------+------------+--------------+-------------+
+|        55 | ben        | stokes    | 1991-06-04 | christchurch | england     |
+|         7 | ms         | dhoni     | 1981-07-07 | ranchi       | india       |
++-----------+------------+-----------+------------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> create database EMP(firstname char(20) not null,lastname char(20),age int(3),sex char(1),income int(6));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(firstname char(20) not null,lastname char(20),age int(3),sex char(1),income int' at line 1
+mysql> create database EMP;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table EMP(firstname char(20) not null,lastname char(20),age int(3),sex char(1),income int(6));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc players;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| jersey_no   | int(3)      | YES  |     | NULL    |       |
+| first_name  | varchar(15) | YES  |     | NULL    |       |
+| last_name   | varchar(15) | YES  |     | NULL    |       |
+| dob         | date        | YES  |     | NULL    |       |
+| birth_place | varchar(20) | YES  |     | NULL    |       |
+| playing_for | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> desc EMP;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| firstname | char(20) | NO   |     | NULL    |       |
+| lastname  | char(20) | YES  |     | NULL    |       |
+| age       | int(3)   | YES  |     | NULL    |       |
+| sex       | char(1)  | YES  |     | NULL    |       |
+| income    | int(6)   | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into EMP values('koushik','venkiteela','19','M','83000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into EMP values('hemanth','bezawada','18','M','92000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into EMP values('mahesh','kovuru','19','M','75000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> START TRANSACTIONS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TRANSACTIONS' at line 1
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from EMP;
++-----------+------------+------+------+--------+
+| firstname | lastname   | age  | sex  | income |
++-----------+------------+------+------+--------+
+| koushik   | venkiteela |   19 | M    |  83000 |
+| hemanth   | bezawada   |   18 | M    |  92000 |
+| mahesh    | kovuru     |   19 | M    |  75000 |
++-----------+------------+------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update EMP SET age=age+1;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SAVEPOINT samplesavepoint;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ROLLBACK TO SAVEPOINT samplesavepoint;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from EMP;
++-----------+------------+------+------+--------+
+| firstname | lastname   | age  | sex  | income |
++-----------+------------+------+------+--------+
+| koushik   | venkiteela |   20 | M    |  83000 |
+| hemanth   | bezawada   |   19 | M    |  92000 |
+| mahesh    | kovuru     |   20 | M    |  75000 |
++-----------+------------+------+------+--------+
+3 rows in set (0.00 sec)
