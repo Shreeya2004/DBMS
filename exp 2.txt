@@ -1,0 +1,55 @@
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | int(4)      | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> ALTER TABLE faculty ADD PRIMARY KEY (facno);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | int(4)      | NO   | PRI | 0       |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> create table salary (amount int(6),month varchar(15));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc salary;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| amount | int(6)      | YES  |     | NULL    |       |
+| month  | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> ALTER TABLE salary ADD FOREIGN KEY (amount) REFERENCES faculty (facno);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| amount | int(6)      | YES  | MUL | NULL    |       |
+| month  | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
