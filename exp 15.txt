@@ -1,0 +1,27 @@
+EXPERIMENT 15:
+mysql> DELIMITER //
+mysql> CREATE FUNCTION salary(bonus INT)
+    -> RETURNS INT
+    -> BEGIN
+    -> DECLARE income INT;
+    -> SET income = 0;
+    -> myLabel: LOOP
+    -> SET income = income + bonus;
+    -> IF income < 10000 THEN
+    -> ITERATE myLabel;
+    -> END IF;
+    -> LEAVE myLabel;
+    -> END LOOP myLabel;
+    -> RETURN income;
+    -> END; //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER ;
+mysql> SELECT salary(300000);
++--------------+
+| salary(300000) |
++--------------+
+|        3000000 |
++--------------+
+1 row in set (0.02 sec)
+
